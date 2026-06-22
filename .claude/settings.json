@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"f:/Claude code/src/app/\\(main\\)/textbooks/[id]\" \"f:/Claude code/src/app/\\(main\\)/knowledge\" \"f:/Claude code/src/app/\\(main\\)/mindmap\" \"f:/Claude code/src/app/\\(main\\)/chat\" \"f:/Claude code/src/app/\\(main\\)/settings\" \"f:/Claude code/src/components/layout\" \"f:/Claude code/src/components/common\")",
+      "Bash(timeout 12 npm run dev)",
+      "Bash(npm run *)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ],
+    "additionalDirectories": [
+      "f:\\Claude code\\src\\app\\(main)\\textbooks"
+    ]
+  }
+}

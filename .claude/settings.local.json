@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --use-npm)",
+      "Bash(npx create-next-app@latest highschool-ai-tutor --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --use-npm)",
+      "Bash(mv highschool-ai-tutor/* .)",
+      "Bash(mv highschool-ai-tutor/.gitignore .)",
+      "Bash(mv highschool-ai-tutor/.eslintrc.json .)",
+      "Bash(rmdir highschool-ai-tutor *)",
+      "Bash(ls -la highschool-ai-tutor/)",
+      "Bash(rm -rf highschool-ai-tutor)",
+      "Bash(npm install *)",
+      "Bash(npx shadcn@latest init -d --force)",
+      "Bash(npx shadcn@latest add card dialog input textarea scroll-area separator sheet skeleton tabs accordion badge progress tooltip dropdown-menu label select sonner -y)",
+      "Bash(timeout 15 npm run dev)"
+    ]
+  }
+}
