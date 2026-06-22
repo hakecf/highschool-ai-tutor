@@ -13,7 +13,15 @@
       "Bash(node -e \"import\\('pdf-parse'\\).then\\(m => console.log\\('default:', typeof m.default, 'keys:', Object.keys\\(m\\)\\)\\)\")",
       "Bash(node -e ' *)",
       "Bash(node -e \"const p = require\\('pdf-parse'\\); console.log\\('CJS typeof:', typeof p\\); console.log\\('CJS keys:', Object.keys\\(p\\).slice\\(0,5\\)\\);\")",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "Bash(npx vercel *)",
+      "Bash(curl -sI https://vercel.com)",
+      "Bash(ping -n 2 vercel.com)",
+      "Bash(node -e \"process.env.NODE_TLS_REJECT_UNAUTHORIZED='0'; fetch\\('https://vercel.com'\\).then\\(r => console.log\\('OK', r.status\\)\\).catch\\(e => console.log\\('Error:', e.message\\)\\)\")",
+      "Bash(gh auth *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)"
     ],
     "additionalDirectories": [
       "f:\\Claude code\\src\\app\\(main)\\textbooks"

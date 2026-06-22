@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAnthropicClient, DEFAULT_MODEL } from "@/lib/ai/client";
+import { getAIClient, DEFAULT_MODEL } from "@/lib/ai/client";
 import { buildMindMapPrompt } from "@/lib/ai/prompts";
 
 export async function POST(request: NextRequest) {
@@ -17,43 +17,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 格式化知识点列表
     const kpText = knowledgePoints
       .sort((a, b) => a.order - b.order)
       .map((kp) => `${"  ".repeat(kp.level)}- ${kp.name}`)
       .join("\n");
 
-    const client = getAnthropicClient();
+    const client = getAIClient();
     const { system, user } = buildMindMapPrompt(subject);
 
-    const response = await client.messages.create({
+    const response = await client.chat.completions.create({
       model: DEFAULT_MODEL,
       max_tokens: 4096,
       temperature: 0.3,
-      system,
       messages: [
-        {
-          role: "user",
-          content: `${user}\n\n知识点列表：\n${kpText}\n\n请生成 Markdown 大纲。`,
-        },
+        { role: "system", content: system },
+        { role: "user", content: `${user}\n\n知识点列表：\n${kpText}\n\n请生成 Markdown 大纲。` },
       ],
     });
 
-    const contentBlock = response.content.find(
-      (block) => block.type === "text"
-    );
-    if (!contentBlock || contentBlock.type !== "text") {
-      throw new Error("AI 未返回有效文本回复");
-    }
+    const content = response.choices[0]?.message?.content;
+    if (!content) throw new Error("AI 未返回有效回复");
 
-    return NextResponse.json({
-      success: true,
-      markdown: contentBlock.text,
-    });
+    return NextResponse.json({ success: true, markdown: content });
   } catch (error) {
     console.error("Mindmap generation error:", error);
-    const message =
-      error instanceof Error ? error.message : "AI 生成失败";
+    const message = error instanceof Error ? error.message : "AI 生成失败";
     return NextResponse.json(
       { success: false, error: `思维导图生成失败：${message}`, code: "AI_ANALYSIS_FAILED" },
       { status: 500 }
