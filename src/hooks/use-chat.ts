@@ -47,7 +47,7 @@ export function useChat() {
       }
 
       // 添加用户消息
-      const userMsg: ChatMessage = {
+      const userMsg: Omit<ChatMessage, "createdAt"> = {
         id: generateId(),
         sessionId,
         role: "user",
@@ -88,7 +88,7 @@ export function useChat() {
       }));
 
       // 添加助手占位消息
-      const assistantMsg: ChatMessage = {
+      const assistantMsg: Omit<ChatMessage, "createdAt"> = {
         id: generateId(),
         sessionId,
         role: "assistant",

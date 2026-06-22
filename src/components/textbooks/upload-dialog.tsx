@@ -149,7 +149,7 @@ export function UploadDialog({ open, onOpenChange }: UploadDialogProps) {
           {/* 学科 */}
           <div className="space-y-1.5">
             <Label>学科</Label>
-            <Select value={subject} onValueChange={setSubject}>
+            <Select value={subject} onValueChange={(v) => v && setSubject(v)}>
               <SelectTrigger>
                 <SelectValue placeholder="选择学科" />
               </SelectTrigger>
@@ -173,7 +173,7 @@ export function UploadDialog({ open, onOpenChange }: UploadDialogProps) {
             </div>
             <div className="space-y-1.5">
               <Label>年级</Label>
-              <Select value={grade} onValueChange={setGrade}>
+              <Select value={grade} onValueChange={(v) => v && setGrade(v)}>
                 <SelectTrigger>
                   <SelectValue placeholder="选择年级" />
                 </SelectTrigger>

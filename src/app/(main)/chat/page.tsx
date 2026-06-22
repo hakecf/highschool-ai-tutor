@@ -103,7 +103,7 @@ export default function ChatPage() {
         <div className="flex items-center gap-2 px-4 py-2 border-b bg-background/80">
           <Select
             value={selectedSubject}
-            onValueChange={setSelectedSubject}
+            onValueChange={(v) => v && setSelectedSubject(v)}
           >
             <SelectTrigger className="w-24 h-8 text-xs">
               <SelectValue />
@@ -118,7 +118,7 @@ export default function ChatPage() {
           {textbooks.length > 0 && (
             <Select
               value={selectedTextbookId || ""}
-              onValueChange={(v) => setSelectedTextbookId(v || undefined)}
+              onValueChange={(v) => setSelectedTextbookId(v ?? undefined)}
             >
               <SelectTrigger className="w-40 h-8 text-xs">
                 <SelectValue placeholder="选择教材（可选）" />

@@ -3,7 +3,8 @@
 import { usePathname } from "next/navigation";
 import { ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const pathLabels: Record<string, string> = {
   textbooks: "教材管理",
@@ -30,22 +31,24 @@ export function Header() {
     <header className="sticky top-0 z-30 flex h-14 items-center gap-2 border-b border-border bg-background/80 backdrop-blur-sm px-4">
       {/* 面包屑 */}
       <nav className="flex items-center gap-1 text-sm text-muted-foreground">
-        <Button variant="ghost" size="sm" className="h-7 px-2" asChild>
-          <Link href="/">
-            <Home className="h-3.5 w-3.5" />
-          </Link>
-        </Button>
+        <Link
+          href="/"
+          className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "h-7 px-2")}
+        >
+          <Home className="h-3.5 w-3.5" />
+        </Link>
         {breadcrumbs.map((crumb, i) => (
           <span key={crumb.href} className="flex items-center gap-1">
             <ChevronRight className="h-3 w-3" />
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-7 px-2 text-xs"
-              asChild
+            <Link
+              href={crumb.href}
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "sm" }),
+                "h-7 px-2 text-xs"
+              )}
             >
-              <Link href={crumb.href}>{crumb.label}</Link>
-            </Button>
+              {crumb.label}
+            </Link>
           </span>
         ))}
       </nav>

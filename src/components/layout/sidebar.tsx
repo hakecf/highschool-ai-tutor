@@ -11,7 +11,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 interface NavItem {
@@ -50,20 +50,20 @@ export function Sidebar() {
           const isActive =
             pathname === item.href || pathname.startsWith(item.href + "/");
           return (
-            <Button
+            <Link
               key={item.href}
-              variant={isActive ? "secondary" : "ghost"}
+              href={item.href}
               className={cn(
+                buttonVariants({
+                  variant: isActive ? "secondary" : "ghost",
+                }),
                 "w-full justify-start gap-3 h-10",
                 isActive && "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
               )}
-              asChild
             >
-              <Link href={item.href}>
-                <item.icon className="h-4 w-4 shrink-0" />
-                <span>{item.label}</span>
-              </Link>
-            </Button>
+              <item.icon className="h-4 w-4 shrink-0" />
+              <span>{item.label}</span>
+            </Link>
           );
         })}
       </nav>
@@ -72,19 +72,17 @@ export function Sidebar() {
 
       {/* Settings */}
       <div className="p-3">
-        <Button
-          variant="ghost"
+        <Link
+          href="/settings"
           className={cn(
+            buttonVariants({ variant: "ghost" }),
             "w-full justify-start gap-3 h-10",
             pathname === "/settings" && "bg-sidebar-accent"
           )}
-          asChild
         >
-          <Link href="/settings">
-            <Settings className="h-4 w-4 shrink-0" />
-            <span>设置</span>
-          </Link>
-        </Button>
+          <Settings className="h-4 w-4 shrink-0" />
+          <span>设置</span>
+        </Link>
       </div>
     </aside>
   );

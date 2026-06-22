@@ -14,7 +14,7 @@ interface ChatState {
   deleteSession: (id: string) => Promise<void>;
   setCurrentSession: (id: string | null) => void;
   loadMessages: (sessionId: string) => Promise<void>;
-  addMessage: (msg: ChatMessage) => void;
+  addMessage: (msg: Omit<ChatMessage, "createdAt">) => void;
   appendToLastMessage: (text: string) => void;
   setStreaming: (streaming: boolean) => void;
 }
@@ -63,9 +63,10 @@ export const useChatStore = create<ChatState>((set, get) => ({
   },
 
   addMessage: (msg) => {
-    set((s) => ({ messages: [...s.messages, msg] }));
+    const fullMsg: ChatMessage = { ...msg, createdAt: Date.now() };
+    set((s) => ({ messages: [...s.messages, fullMsg] }));
     // 持久化
-    chatDB.addChatMessage(msg);
+    chatDB.addChatMessage(fullMsg);
     // 更新会话时间
     if (get().currentSessionId) {
       chatDB.updateChatSession(get().currentSessionId!, {

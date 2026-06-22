@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { BookOpen, Brain, MessageCircle, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -25,19 +25,27 @@ export default function HomePage() {
           构建知识体系，随时答疑解惑
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Button asChild size="lg" className="gap-2">
-            <Link href="/textbooks">
-              <BookOpen className="h-5 w-5" />
-              开始使用
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-          <Button asChild variant="outline" size="lg" className="gap-2">
-            <Link href="/chat">
-              <MessageCircle className="h-5 w-5" />
-              直接提问
-            </Link>
-          </Button>
+          <Link
+            href="/textbooks"
+            className={cn(
+              buttonVariants({ variant: "default", size: "lg" }),
+              "gap-2"
+            )}
+          >
+            <BookOpen className="h-5 w-5" />
+            开始使用
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            href="/chat"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "gap-2"
+            )}
+          >
+            <MessageCircle className="h-5 w-5" />
+            直接提问
+          </Link>
         </div>
       </main>
 

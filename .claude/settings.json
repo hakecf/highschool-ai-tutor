@@ -5,7 +5,15 @@
       "Bash(timeout 12 npm run dev)",
       "Bash(npm run *)",
       "Bash(git init *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git config *)",
+      "Bash(git commit *)",
+      "Bash(node -e \"const m = require\\('pdf-parse'\\); console.log\\(typeof m, Object.keys\\(m\\)\\)\")",
+      "Bash(node -e \"const p = require\\('pdf-parse'\\); console.log\\(typeof p.PDFParse\\)\")",
+      "Bash(node -e \"import\\('pdf-parse'\\).then\\(m => console.log\\('default:', typeof m.default, 'keys:', Object.keys\\(m\\)\\)\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const p = require\\('pdf-parse'\\); console.log\\('CJS typeof:', typeof p\\); console.log\\('CJS keys:', Object.keys\\(p\\).slice\\(0,5\\)\\);\")",
+      "Bash(npm uninstall *)"
     ],
     "additionalDirectories": [
       "f:\\Claude code\\src\\app\\(main)\\textbooks"
